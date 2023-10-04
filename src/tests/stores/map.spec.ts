@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeEach, expectTypeOf } from "vitest";
 import { setActivePinia, createPinia } from "pinia";
-import { useMapStore } from "../map";
+import { useMapStore } from "../../stores/map";
 import L from "leaflet";
 import type { GeoJSON } from "geojson";
 import type { MapData, LayerData } from "../../types";

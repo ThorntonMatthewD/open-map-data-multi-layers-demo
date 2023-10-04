@@ -1,5 +1,5 @@
 import talkback from "talkback";
-import Tape from "talkback/tape";
+import type Tape from "talkback/tape";
 
 const TEST_SERVER_PORT = 9090;
 

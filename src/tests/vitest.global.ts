@@ -8,11 +8,11 @@ export const setup = async () => {
     host: "https://data.openupstate.org",
     record: talkback.Options.RecordMode.NEW,
     port: TEST_SERVER_PORT,
-    path: "./src/test/tapes",
+    path: "./src/tests/tapes",
     http: true,
     tapeNameGenerator(tapeNumber: number, tape: Tape) {
       //TODO: Why are some of the tapes pretty much blank?
-      return `${tape.req.method}-${tape.req.url || "/"}-${tapeNumber}`;
+      return `${tape.req.method} ${tape.req.url || "/"} ${tapeNumber}`;
     },
   };
 

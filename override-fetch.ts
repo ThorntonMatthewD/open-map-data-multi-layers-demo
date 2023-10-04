@@ -10,7 +10,7 @@ const get_proxied_url = (url: any) => {
   newURL.protocol = "http:";
 
   return newURL.href;
-}
+};
 
 beforeAll(() => {
   global.fetch = async (url) => {

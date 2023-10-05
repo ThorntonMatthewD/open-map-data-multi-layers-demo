@@ -24,4 +24,8 @@ const create_talkback_server = async () => {
   };
 };
 
+if (process.env.DIRECT === "enabled") {
+  create_talkback_server();
+}
+
 export default create_talkback_server;

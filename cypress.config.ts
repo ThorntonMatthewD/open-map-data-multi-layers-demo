@@ -1,4 +1,6 @@
 import { defineConfig } from "cypress";
+import create_talkback_server from "./src/tests/support/talkback-server";
+
 
 export default defineConfig({
   e2e: {
@@ -9,5 +11,10 @@ export default defineConfig({
     videosFolder: "src/tests/cypress/videos",
     downloadsFolder: "src/tests/cypress/downloads",
     supportFile: "src/tests/cypress/support/e2e.ts",
+    setupNodeEvents(on, config) {
+      on("before:run", (details) => {
+        create_talkback_server();
+      });
+    }
   },
 });

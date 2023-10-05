@@ -58,7 +58,7 @@ describe("mapStore", () => {
     expect(fetchResult["Breweries"].mapTitle).toBe("Breweries");
     expect(fetchResult["Breweries"].mapSlug).toBe("breweries");
     expect(fetchResult["Breweries"].geoJsonUrl.toString()).toBe(
-      "https://data.openupstate.org/map/geojson/breweries/"
+      `${process.env.DATA_API_BASE_URL}/map/geojson/breweries/`
     );
   });
 

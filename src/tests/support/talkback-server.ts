@@ -24,6 +24,8 @@ const create_talkback_server = async () => {
   };
 };
 
+// Server can be launched independently by calling
+//   DIRECT=enabled npx tsx talkback-server.ts
 if (process.env.DIRECT === "enabled") {
   create_talkback_server();
 }

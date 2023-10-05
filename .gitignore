@@ -14,8 +14,8 @@ dist-ssr
 coverage
 *.local
 
-src/test/cypress/videos/
-src/test/cypress/screenshots/
+src/tests/cypress/videos/
+src/tests/cypress/screenshots/
 
 # Editor directories and files
 .vscode/*

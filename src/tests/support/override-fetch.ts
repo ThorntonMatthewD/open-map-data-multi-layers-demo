@@ -1,8 +1,6 @@
-import { afterAll, beforeAll } from "vitest";
-
 const original_fetch = global.fetch;
 
-const get_proxied_url = (url: RequestInfo | URL) => {
+const get_proxy_url = (url: RequestInfo | URL) => {
   let href = "";
 
   if (typeof url === "string") {
@@ -19,14 +17,14 @@ const get_proxied_url = (url: RequestInfo | URL) => {
   return newURL.href;
 };
 
-const get_link_from_request_info = (reqInfo: Request) => reqInfo.url;
+export const get_link_from_request_info = (reqInfo: Request) => reqInfo.url;
 
-beforeAll(() => {
+export const replace_global_fetch = () => {
   global.fetch = async (url) => {
-    return original_fetch(get_proxied_url(url));
+    return original_fetch(get_proxy_url(url));
   };
-});
+};
 
-afterAll(() => {
+export const reset_global_fetch = () => {
   global.fetch = original_fetch;
-});
+};

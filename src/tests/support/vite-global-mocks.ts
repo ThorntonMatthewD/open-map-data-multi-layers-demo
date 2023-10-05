@@ -1,8 +1,5 @@
 import { afterAll, beforeAll } from "vitest";
-import {
-  replace_global_fetch,
-  reset_global_fetch,
-} from "@/tests/support/override-fetch";
+import { replace_global_fetch, reset_global_fetch } from "./override-fetch";
 
 beforeAll(() => replace_global_fetch());
 

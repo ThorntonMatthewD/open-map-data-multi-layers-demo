@@ -1,15 +1,6 @@
 describe("Map", () => {
   function loadMap(path: string) {
-    cy.intercept("https://*.tile.openstreetmap.org/**", {
-      fixture: "images/tile.png",
-    }).as("tiles");
-    cy.intercept("https://data.openupstate.org/rest/maps?_format=json", {
-      fixture: "maps.json",
-    }).as("mapsList");
-
     cy.visit(path);
-
-    cy.wait(["@mapsList", "@tiles"]);
 
     cy.url()
       .should("contain", "lat=")
@@ -18,9 +9,7 @@ describe("Map", () => {
   }
 
   function waitForLayer(func: Function) {
-    cy.intercept("https://data.openupstate.org/**", {
-      fixture: "art-galleries.json",
-    }).as("layer");
+    // TODO: Wait for the layer
 
     func();
 

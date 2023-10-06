@@ -12,8 +12,6 @@ describe("Map", () => {
     // TODO: Wait for the layer
 
     func();
-
-    cy.wait("@layer");
   }
 
   it("adds a map layer and changes URL", () => {

@@ -1,7 +1,7 @@
 <script lang="ts">
 import "leaflet/dist/leaflet.css";
 import L, { LatLng } from "leaflet";
-import type { Map, GeoJSON, LayersControlEvent } from "leaflet";
+import type { Map, GeoJSON, LayersControlEvent, Layer } from "leaflet";
 </script>
 
 <script setup lang="ts">
@@ -48,9 +48,22 @@ async function initializeMap(map: Map) {
 
   for (const mapTitle in await mapStore.fetchAvailableMaps()) {
     const mapData = mapStore.availableMaps[mapTitle];
+    const layerData = mapStore.loadedMaps[mapData.mapSlug];
+
+    // If the layerData is already present, then it is leftover from a previous
+    // visit to this page.
+    if (layerData) {
+      layersControl.addOverlay(
+        layerData.layer,
+        `${mapData.mapTitle} (${mapData.color})`,
+      );
+    }
+
     await addMapLayer(map, layersControl, mapData, false);
 
     if (mapsToEnable.has(mapData.mapSlug)) {
+      // Remove map from loaded maps since its markers will need re-pulled
+      mapStore.removeMapLayer(mapData.mapSlug);
       addMapLayer(map, layersControl, mapData, true);
     }
   }
@@ -87,7 +100,6 @@ async function addMapLayer(
   mapData: MapData,
   visible: boolean,
 ) {
-  // if layer is already fully loaded, just update the visibility in the store
   const layerData = mapStore.loadedMaps[mapData.mapSlug];
   const maintainerData: MaintainerData = {
     contributionInfo: mapData.contributionInfo,
@@ -95,6 +107,7 @@ async function addMapLayer(
     maintainers: mapData.maintainers,
   };
 
+  // if layer is already fully loaded, just update the visibility in the store
   if (layerData?.loaded) {
     layerData.visible = visible;
     mapStore.addMapLayer(mapData.mapSlug, layerData, maintainerData);
